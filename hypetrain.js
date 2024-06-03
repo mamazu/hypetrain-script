@@ -44,7 +44,9 @@ function summarize(supporters) {
             continue;
         }
 
-        const subMatch = text.match(/Gave out (\d+) Community Sub gifts?/)|| text.match(/Gifted a (\d+) Month Tier 1 sub to/)||text.match(/Resubscribed for (\d+) month at Tier 1/);
+        const subMatch = text.match(/Gave out (\d+) Community Sub gifts?/) ||
+              text.match(/Gifted a (\d+) Month Tier \d+ sub to/) ||
+              text.match(/Resubscribed for (\d+) month at Tier \d+/);
         if (subMatch) {
             currentEntry.subs += Number(subMatch[1]);
             matched = true;
