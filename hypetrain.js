@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Copy hypetrain supporters
+// @name        Hypetrain supporters
 // @description Generates a list of hype train supporters and adds a button on the moderator overlay to copy them.
 // @version     1
 // @grant       none
@@ -30,6 +30,7 @@ function summarize(supporters) {
         const currentEntry = summary[username] || {bits: 0, subs: 0};
 
         if (preHypeTrainSupport === 0) {
+            console.log(timeStamp);
             break;
         }
         preHypeTrainSupport--;
@@ -43,7 +44,7 @@ function summarize(supporters) {
             continue;
         }
 
-        const subMatch = text.match(/Gave out (\d+) Community Sub gifts?/)|| text.match(/Gifted a (\d+) Month Tier \d sub to/)||text.match(/Resubscribed for (\d+) month at Tier \d/);
+        const subMatch = text.match(/Gave out (\d+) Community Sub gifts?/)|| text.match(/Gifted a (\d+) Month Tier 1 sub to/)||text.match(/Resubscribed for (\d+) month at Tier 1/);
         if (subMatch) {
             currentEntry.subs += Number(subMatch[1]);
             matched = true;
@@ -79,16 +80,26 @@ function generateSupporterList() {
     alert(summarize(supporters))
 }
 
+function generateButton(className) {
+    const layoutContainer = document.createElement('div');
+    layoutContainer.setAttribute('class', className);
 
-const supporterCopyButton = document.createElement('button');
-supporterCopyButton.setAttribute('id', 'mamazubutton');
-supporterCopyButton.textContent = 'Generate Hypetrain supporters';
-supporterCopyButton.style.position = 'absolute';
-supporterCopyButton.style.left= '50%';
-supporterCopyButton.style.zIndex = 10000;
-supporterCopyButton.style.border= '1px solid red';
+    const supporterCopyButton = document.createElement('button');
+    supporterCopyButton.setAttribute('id', 'mamazubutton');
+    supporterCopyButton.innerText = 'Hype Train supporters';
+    supporterCopyButton.style.backgroundColor = "rgb(54, 255, 255)";
+    supporterCopyButton.style.color = "black";
+    supporterCopyButton.addEventListener('click', generateSupporterList);
 
-supporterCopyButton.addEventListener('click', generateSupporterList);
+    layoutContainer.appendChild(supporterCopyButton);
 
+    return layoutContainer;
+}
 
-document.body.appendChild(supporterCopyButton);
+setTimeout(() => {
+    console.log("Adding 'Hypetrain support generate'-button");
+    const panel = document.querySelector('[class*="stream-session-panel"]')
+
+    //Generating the button and copying over the styles of the next element as CSS classes are generated.
+    panel.after(generateButton(panel.nextSibling.getAttribute('class')));
+}, 5000);
