@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        Hypetrain supporters
 // @description Generates a list of hype train supporters and adds a button on the moderator overlay to copy them.
-// @version     1
+// @version     1.0.1
 // @grant       none
-// @match       https://www.twitch.tv/moderator/*
+// @match       https://www.twitch.tv/moderator/baldurwoof
 // ==/UserScript==
 
 function printSummary(summary, errors) {
@@ -99,8 +99,8 @@ function generateButton(className) {
 }
 
 setTimeout(() => {
-    console.log("Adding 'Hypetrain support generate'-button");
-    const panel = document.querySelector('[class*="stream-session-panel"]')
+    console.debug("Adding 'Hypetrain support generate'-button");
+    const panel = document.querySelector('[data-highlight-selector="creator-meu"]')
 
     //Generating the button and copying over the styles of the next element as CSS classes are generated.
     panel.after(generateButton(panel.nextSibling.getAttribute('class')));
