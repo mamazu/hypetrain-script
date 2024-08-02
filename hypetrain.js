@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name        Hypetrain supporters
 // @description Generates a list of hype train supporters and adds a button on the moderator overlay to copy them.
-// @version     1.0.2
+// @version     1.0.3
 // @grant       none
+// @match       https://www.twitch.tv/moderator/baldurwoof/
 // @match       https://www.twitch.tv/moderator/baldurwoof
 // @downloadURL https://raw.githubusercontent.com/mamazu/hypetrain-script/main/hypetrain.js
 // @updateURL   https://raw.githubusercontent.com/mamazu/hypetrain-script/main/hypetrain.js
